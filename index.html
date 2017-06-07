@@ -30,11 +30,30 @@
           </div>
   <!-- This main panel will hold each of the resulting train time -->
           <div class="panel-body" id="well-section">
-<!--             <div class="row">
+            <div class="row">
               <div class="col-sm-12">
-                
-              </div> -->
-            <!-- </div> -->
+
+              <tr><strong>Train Name</strong>
+                <td><span id="trainNameCurrent"></span></td>
+              </tr>
+
+              <tr><strong>Destination</strong>
+                <td><span id="destinationCurrent"></span></td>
+              </tr>
+
+              <tr><strong>Frequency(min)</strong>
+                <td><span id="frequencyCurrent"></span></td>
+              </tr>
+
+              <tr><strong>Next Arrival</strong>
+                <td><span id="arrivalCurrent"></span></td>
+              </tr>
+
+              <tr><strong>Minutes Away</strong>
+                <td><span id="minAwayCurent"></span></td>
+              </tr>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +90,7 @@
 
      					<div class="form-group">
      						<label id="frequency">Frequency (min)</label>
-     						<input type="time" class="form-control" id="frequency-input">
+     						<input type="text" class="form-control" id="frequency-input">
      					</div>
 
                 <!-- Here we have our final submit button -->
@@ -79,16 +98,14 @@
      				</form>
 			     </div>
 		  </div>
-		
-
-
 
 	</div>
 
 
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-   <script type="text/javascript" src="javascript/gif.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
 
+  <script type="text/javascript" src="assets/javascript.js"></script>
 </body>
 </html>
