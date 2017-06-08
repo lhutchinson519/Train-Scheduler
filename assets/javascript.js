@@ -15,69 +15,42 @@ var database = firebase.database();
 //inital values
 var trainName="";
 var destination="";
+var firstTrain="";
 var frequency="";
-var nextArrival="";
-var minutesAway="";
 
-// // At the initial load, get a snapshot of the current data.
-// database.ref().on("value", function(snapshot) {
+//Capture click button
+$("#run-search").on("click", function(event){
+    event.preventDefault();
 
-// 	// Change the HTML to reflect the value
-//     $("#trainNameCurrent").html(trainName);
-//     $("#destinationCurrent").html(destination);
-//     $("#frequencyCurrent").html(frequency);
-//     $("#arrivalCurrent").html(nextArrival);
-//     $("#minAwayCurrent").html(minutesAway);
+//Grab values from text boxes
+trainName=$("#train-name").val().trim();
+destination=$("#destination-input").val().trim();
+firstTrain=$("#train-time-input").val().trim();
+frequency=$("#frequency-input").val().trim();
 
-//     console.log(snapshot.val().destination);
-
-// }, function(errorObject){
-// 	console.log("The read failed: " + errorObject.code);
-// });
-
-database.ref().on("child_added", function(childSnapshot) {
-		// Change the HTML to reflect the value
-    $("#trainNameCurrent").html(trainName);
-    $("#destinationCurrent").html(destination);
-    $("#frequencyCurrent").html(frequency);
-    $("#arrivalCurrent").html(nextArrival);
-    $("#minAwayCurrent").html(minutesAway);
-
-    console.log(childSnapshot.val().destination);
-
-}, function(errorObject){
-	console.log("The read failed: " + errorObject.code);
+// Code for handling the push
+database.ref().push({
+  trainName: trainName,
+  destination: destination,
+  firstTrain: firstTrain,
+  frequency: frequency
+    });
 });
 
+// Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+ database.ref().on("child_added", function(childSnapshot) {
 
-$("#run-search").on("click", function(){
+ // Log everything that's coming out of snapshot
+    console.log(childSnapshot.val().trainName);
+    console.log(childSnapshot.val().destination);
+    console.log(childSnapshot.val().firstTrain);
+    console.log(childSnapshot.val().frequency);
 
-	event.preventDefault();
-	 var trainName=$("#search-term").val().trim();
-	 var destination=$("#destination-input").val().trim();
-	 var frequency=$("#frequency-input").val().trim();
-	 var nextArrival=$("#train-time-input").val().trim();
-
-	 console.log(trainName)
-
-	// Save new value to Firebase
-  	database.ref().push({
-    trainName: trainName,
-    destination: destination,
-    frequency: frequency,
-    nextArrival: nextArrival,
-    minutesAway: minutesAway
- 	});
-
-  	// Log the value of clickCounter
-  	console.log(trainName);
-  	console.log(destination);
-  	console.log(frequency);
-
-  	// Change the HTML Values
-  $("#trainNameCurrent").html(trainName);
-  $("#destinationCurrent").html(destination);
-  $("#frequency").html(frequency);
-  $("#arrivalCurrent").html(destination);
-  $("#minAwayCurrent").html(minutesAway);
+  // full list of items to the well
+  $("#new-data").append(
+  		"<tr><td id='trainName'> " + childSnapshot.val().trainName +
+     	"</td> <td><span id='destination'> " + childSnapshot.val().destination +
+     	"</td> <td></span><span id='frequency'> " + childSnapshot.val().frequency +
+     	"</td> <td></span><span id='firstTrain'> " + childSnapshot.val().firstTrain +   	 
+     	"<td> </span></tr>");
 });

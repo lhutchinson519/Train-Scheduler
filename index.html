@@ -32,26 +32,29 @@
           <div class="panel-body" id="well-section">
             <div class="row">
               <div class="col-sm-12">
+              
+              <table class="table">
+              <thead>
+              <th><strong>Train Name</strong>
+              </th>
 
-              <tr><strong>Train Name</strong>
-                <td><span id="trainNameCurrent"></span></td>
-              </tr>
+              <th><strong>Destination</strong>
+              </th>
 
-              <tr><strong>Destination</strong>
-                <td><span id="destinationCurrent"></span></td>
-              </tr>
+              <th><strong>Frequency(min)</strong>
+              </th>
 
-              <tr><strong>Frequency(min)</strong>
-                <td><span id="frequencyCurrent"></span></td>
-              </tr>
+              <th><strong>Next Arrival</strong>
+              </th>
 
-              <tr><strong>Next Arrival</strong>
-                <td><span id="arrivalCurrent"></span></td>
-              </tr>
+              <th><strong>Minutes Away</strong>
+              </th>
+              </thead>
+              
+              <tbody id="new-data">
+              </tbody>
+              </table>
 
-              <tr><strong>Minutes Away</strong>
-                <td><span id="minAwayCurent"></span></td>
-              </tr>
               </div>
             </div>
           </div>
@@ -75,7 +78,7 @@
      				<form id="form">
      					<div class="form-group">
      						<label id="search">Train Name</label>
-     						<input type="text" class="form-control" id="search-term">
+     						<input type="text" class="form-control" id="train-name">
      					</div>
 
      					<div class="form-group">
@@ -103,6 +106,8 @@
 
 
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
 
