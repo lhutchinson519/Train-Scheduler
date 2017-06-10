@@ -57,16 +57,14 @@ database.ref().push({
     var newFrequency = childSnapshot.val().frequency;
     var remainder = moment().diff(convertedTime, "minutes")%newFrequency;
     var minAway = newFrequency - remainder;
+    var newNextArrival = moment().add(minAway, 'minutes').format("hh:mm a")
 
-    console.log(now);
-    console.log(moment(convertedTime).toNow());
-    console.log(moment().diff(convertedTime, "minutes"));
-    console.log(moment().diff(convertedTime, "minutes")%newFrequency);
-    console.log(minAway);
-
-    //add to current time for next arrival current time + minutes away
-
-
+    console.log("now: " + now);
+    console.log("time to now: " + moment(convertedTime).toNow());
+    console.log("time b/w now and next: " + moment().diff(convertedTime, "minutes"));
+    console.log("remainder: " + moment().diff(convertedTime, "minutes")%newFrequency);
+    console.log("minutes away: " + minAway);
+    console.log(newNextArrival);
 
 
   // full list of items to the well
@@ -74,15 +72,7 @@ database.ref().push({
   		"<tr><td id='trainName'> " + childSnapshot.val().trainName +
      	"</td> <td><span id='destination'> " + childSnapshot.val().destination +
      	"</td> <td></span><span id='frequency'> " + childSnapshot.val().frequency +
-     	"</td></tr>");
-});
-
-
-//    // full list of items to the well
-//   $("#new-data").append(
-//   		"<tr><td id='trainName'> " + childSnapshot.val().trainName +
-//      	"</td> <td><span id='destination'> " + childSnapshot.val().destination +
-//      	"</td> <td></span><span id='frequency'> " + childSnapshot.val().frequency +
-//      	"</td> <td></span><span id='firstTrain'> " + childSnapshot.val().firstTrain +   	 
-//      	"<td> </span></tr>");
-// });
+     	"</td><td><span id='newNextArrival'> " + newNextArrival + 
+     	"</td> <td><span id='minAway'> " + minAway + 
+     	"</td> </tr>");
+	});
