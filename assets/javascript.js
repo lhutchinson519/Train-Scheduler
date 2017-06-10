@@ -37,20 +37,52 @@ database.ref().push({
     });
 });
 
+
+
 // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
  database.ref().on("child_added", function(childSnapshot) {
 
  // Log everything that's coming out of snapshot
     console.log(childSnapshot.val().trainName);
     console.log(childSnapshot.val().destination);
-    console.log(childSnapshot.val().firstTrain);
     console.log(childSnapshot.val().frequency);
+    console.log(childSnapshot.val().firstTrain);
+
+
+ //Code this app to calculate when the next train will arrive; 
+ //this should be relative to the current time
+    var nextArrival = childSnapshot.val().firstTrain;
+    var convertedTime = moment(nextArrival,"HH:mm");
+    var now = moment().format('h:mm a');
+    var newFrequency = childSnapshot.val().frequency;
+    var remainder = moment().diff(convertedTime, "minutes")%newFrequency;
+    var minAway = newFrequency - remainder;
+
+    console.log(now);
+    console.log(moment(convertedTime).toNow());
+    console.log(moment().diff(convertedTime, "minutes"));
+    console.log(moment().diff(convertedTime, "minutes")%newFrequency);
+    console.log(minAway);
+
+    //add to current time for next arrival current time + minutes away
+
+
+
 
   // full list of items to the well
   $("#new-data").append(
   		"<tr><td id='trainName'> " + childSnapshot.val().trainName +
      	"</td> <td><span id='destination'> " + childSnapshot.val().destination +
      	"</td> <td></span><span id='frequency'> " + childSnapshot.val().frequency +
-     	"</td> <td></span><span id='firstTrain'> " + childSnapshot.val().firstTrain +   	 
-     	"<td> </span></tr>");
+     	"</td></tr>");
 });
+
+
+//    // full list of items to the well
+//   $("#new-data").append(
+//   		"<tr><td id='trainName'> " + childSnapshot.val().trainName +
+//      	"</td> <td><span id='destination'> " + childSnapshot.val().destination +
+//      	"</td> <td></span><span id='frequency'> " + childSnapshot.val().frequency +
+//      	"</td> <td></span><span id='firstTrain'> " + childSnapshot.val().firstTrain +   	 
+//      	"<td> </span></tr>");
+// });
